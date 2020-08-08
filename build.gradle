@@ -16,13 +16,14 @@ if (!hasProperty('mainClass')) {
 repositories {
     mavenLocal()
     jcenter {
-        url "http://jcenter.bintray.com/"
+        url "https://jcenter.bintray.com/"
     }
+    mavenCentral()
     maven {
         url "http://updates.jmonkeyengine.org/maven/"
     }
     maven {
-        url 'http://nifty-gui.sourceforge.net/nifty-maven-repo/'
+        url "http://nifty-gui.sourceforge.net/nifty-maven-repo/"
     }
     maven { url "https://jitpack.io" }
 
@@ -61,32 +62,36 @@ dependencies {
 
     corelibs dep("com.github.xbuf:jme3_xbuf:0.9.1", false, false)
     corelibs dep("com.badlogicgames.gdx:gdx-ai:1.8.1", true, true)
+    corelibs dep("javax.annotation:javax.annotation-api:1.3.2", false, false)
+    corelibs dep("com.github.nifty-gui:nifty:1.4.2", false, false)
 
-    corelibs dep("org.jmonkeyengine:jme3-core:$jmeEngineVersion", true, true)
-    corelibs dep("org.jmonkeyengine:jme3-desktop:$jmeEngineVersion", true, true)
-    corelibs dep("org.jmonkeyengine:jme3-lwjgl:$jmeEngineVersion", true, true)
-    corelibs dep("org.jmonkeyengine:jme3-effects:$jmeEngineVersion", true, true)
-    corelibs dep("org.jmonkeyengine:jme3-blender:$jmeEngineVersion", true, true)
+    corelibs dep("org.jmonkeyengine:jme3-core", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-desktop", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-lwjgl", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-effects", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-blender", false, false)
 
-    corelibs dep("org.jmonkeyengine:jme3-bullet:$jmeEngineVersion", true, true)
-    corelibs dep("org.jmonkeyengine:jme3-bullet-native:$jmeEngineVersion", true, true)
+    corelibs dep("org.jmonkeyengine:jme3-bullet", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-bullet-native", false, false)
     corelibs dep(fileTree("lib"), false, false)
-    corelibs dep("org.jmonkeyengine:jme3-jogg:$jmeEngineVersion", true, true)
+    corelibs dep("org.jmonkeyengine:jme3-jogg", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-networking", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-niftygui", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-plugins", false, false)
+    corelibs dep("org.jmonkeyengine:jme3-terrain", false, false)
 
-    corelibs dep("org.jmonkeyengine:jme3-networking:$jmeEngineVersion", true, true)
-    corelibs dep("org.jmonkeyengine:jme3-niftygui:$jmeEngineVersion", true, true)
-    corelibs dep("org.jmonkeyengine:jme3-plugins:$jmeEngineVersion", true, true)
-    corelibs dep("org.jmonkeyengine:jme3-terrain:$jmeEngineVersion", true, true)
-
-    optlibs dep("org.jmonkeyengine:jme3-jbullet:$jmeEngineVersion", true, true)
-    optlibs dep("org.jmonkeyengine:jme3-jogl:$jmeEngineVersion", true, true)
-    optlibs dep("org.jmonkeyengine:jme3-android:$jmeEngineVersion", true, true)
-    optlibs dep("org.jmonkeyengine:jme3-ios:$jmeEngineVersion", true, true)
-    optlibs dep("org.jmonkeyengine:jme3-android-native:$jmeEngineVersion", true, true)
-    optlibs dep("org.jmonkeyengine:jme3-bullet-native-android:$jmeEngineVersion", true, true)
-    testdatalibs dep("org.jmonkeyengine:jme3-testdata:$jmeEngineVersion", false, false)
-
-    examplelibs dep("org.jmonkeyengine:jme3-examples:$jmeEngineVersion", false, true)
+//    optlibs dep("org.jmonkeyengine:jme3-jbullet", false, false)
+//    optlibs dep("org.jmonkeyengine:jme3-jogl", false, false)
+//    optlibs dep("org.jmonkeyengine:jme3-android", false, false)
+//    optlibs dep("org.jmonkeyengine:jme3-ios", false, false)
+//    optlibs dep("org.jmonkeyengine:jme3-android-native", false, false)
+//    optlibs dep("org.jmonkeyengine:jme3-bullet-native-android", false, false)
+//    optlibs dep("org.jmonkeyengine:jme3-lwjgl3", false, false)
+    optlibs dep("com.github.stephengold:Heart:5.5.0", false, false)
+    optlibs dep("com.github.stephengold:Minie:1.7.0", false, false)
+    optlibs dep("com.github.stephengold:Wes:0.5.0", false, false)
+//    testdatalibs dep("org.jmonkeyengine:jme3-testdata", false, false)
+//    examplelibs dep("org.jmonkeyengine:jme3-examples", false, false)
 
 }
 
@@ -113,8 +118,8 @@ task checkPlatformConfig {
     def platformFile = file("nbproject/private/platform-private.properties")
     if(!platformFile.exists()){
         def netbeansFolder = file("netbeans")
-        if(!netbeansFolder.exists() || netbeansFolder.list().length == 0){
-            println "Downloading NetBeans Platform base, this only has to be done once.."
+        if(!netbeansFolder.exists() || Folder.list().length == 0){
+            println "Downloading NetBeans Platnetbeansform base, this only has to be done once.."
             /* The following method is discouraged as it does not handle HTTP 301 Redirects
              * def f = file("netbeans.zip")
              * new URL(netbeansUrl).withInputStream{ i -> f.withOutputStream{ it << i }}
